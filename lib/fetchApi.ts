@@ -30,6 +30,8 @@ async function fetchAPI(
         `query PageQuery($id: ID = "") {
             page(id: $id, idType: URI) {
               authorId
+              title
+              id
               editorBlocks {
                 ... on CoreParagraph {
                   name
@@ -50,7 +52,6 @@ async function fetchAPI(
   }
 
   export async function getPost(slug: string){
-    console.log("Slug: "+slug)
     const data = await fetchAPI(
         `query PostQuery($id: ID = "") {
             post(id: $id, idType: SLUG) {

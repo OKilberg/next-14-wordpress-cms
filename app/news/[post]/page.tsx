@@ -6,7 +6,6 @@ type Props = {
 }
 
 export default async function Post({params}: Props) {
-    console.log(params)
     const postData = await getPost(params.post);
   return (
     <div>Test Post!

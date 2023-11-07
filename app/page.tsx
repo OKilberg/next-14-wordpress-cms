@@ -1,8 +1,9 @@
-import { getPosts } from '@/lib/fetchApi'
+import { getPage } from '@/lib/fetchApi'
 
 type block = {
   name: string,
-  clientId: string,
+  clientId?: string,
+  id?: string,
   attributes: {
     content: string
   }
@@ -10,7 +11,7 @@ type block = {
 
 async function getBlockComponents(editorBlocks:Array<block>){
   const blockComponents = editorBlocks.map(block => {
-    if(block.name === 'core/paragraph') return <BlockParagraph key={block.clientId} content={block.attributes.content}/>
+    if(block.name === 'core/paragraph') return <BlockParagraph key={block.clientId || block.id} content={block.attributes.content}/>
   });
   return blockComponents
 
@@ -18,16 +19,14 @@ async function getBlockComponents(editorBlocks:Array<block>){
 
 export default async function Home() {
   
-  const data = await getPosts();
-  const blocks = await getBlockComponents(data[0].editorBlocks)
+  const pageData = await getPage('/');
+  const blocks = await getBlockComponents(pageData.editorBlocks)
 
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      Hello
+    <main className="flex min-h-screen flex-col items-center p-24">
+      <h1>{pageData.title}</h1>
       {blocks}
-      {JSON.stringify(data)}
-      
     </main>
   )
 }
