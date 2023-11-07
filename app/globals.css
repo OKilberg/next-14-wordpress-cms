@@ -25,3 +25,9 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+p {
+  border-style: ridge;
+  border-width: 0.5em;
+
+}
