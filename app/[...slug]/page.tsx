@@ -23,6 +23,7 @@ export async function generateStaticParams() {
 }
 */
 
+//This is where we determine whether the node is a page or a post and render the corresponding component.
 export default async function Page({ params }: Props) {
     const { slug } = params
     console.log("Page params:", slug)
